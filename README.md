@@ -1,8 +1,6 @@
-# python
-python study
-hard word   
-mody 
+#### 进度
+- 20211028日志    
 
-lk
+   1. 
 
 
