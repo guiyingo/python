@@ -15,15 +15,27 @@ def baidu(company):
     href = re.findall(p_href, res, re.S)
     p_title = '<h3 class="news-title_1YtI1">.*?>(.*?)</a>'
     title = re.findall(p_title, res, re.S)
-    p_date = '<span class="c-color-gray2 c-font-normal">(.*?)</span>'
-    date = re.findall(p_date, res)
-    p_source = '<span class="c-color-gray c-font-normal c-gap-right">(.*?)</span>'
+    p_date = '<span class="c-color-gray2 c-font-normal"(.*?)</span>'
+    date = re.findall(p_date, res,re.S)
+    p_source = '<span class="c-color-gray c-font-normal c-gap-right"(.*?)</span>'
     source = re.findall(p_source, res)
 
     for i in range(len(title)):  # range(len(title)),这里因为知道len(title) = 10，所以也可以写成for i in range(10)
         title[i] = title[i].strip()  # strip()函数用来取消字符串两端的换行或者空格，不过这里好像不太需要了
         title[i] = re.sub('<.*?>', '', title[i])  # 核心，用re.sub()函数来替换不重要的内容
-        print(str(i + 1) + '.' + title[i], source[i], date[i])
+        # print(str(i + 1) + '.' + title[i], source[i], date[i])
+        # print(href[i])
+
+        p_source = '"(.*?)"'
+        # source_1 = []
+        source[i] = re.findall(p_source, source[i]) 
+
+
+        p_date = 'aria-label="(.*?)">'
+        date[i] = re.findall(p_date,date[i])
+
+        # print(str(i + 1) + '.' + title[i] + '(' + source[i] + ' ' + date[i] + ')')
+        print(str(i+1) + '.' + title[i]+';'+source[i][0] + ';' + date[i][0])
         print(href[i])
 
 
